@@ -37,7 +37,7 @@ export class Logger {
 
 export enum LogType {
   Server,
-  Resend
+  Talk
 }
 
 export class DateManager {
