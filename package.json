@@ -4,19 +4,19 @@
   "description": "Discord bot.",
   "main": "src/app.js",
   "scripts": {
-    "start": "npm run build && npm run serve",
+    "start": "",
     "build": "tsc",
     "serve": "node build/app",
     "watch": "tsc --watch",
-    "lint": "eslint src/app.ts",
-    "lint:fix": "eslint --fix src/app.ts"
+    "lint": "eslint src --ext .ts",
+    "lint:fix": "eslint src --ext .ts --fix"
   },
   "keywords": [],
   "author": "",
   "license": "Apache-2.0",
   "devDependencies": {
-    "@typescript-eslint/eslint-plugin": "^2.22.0",
-    "@typescript-eslint/parser": "^2.22.0",
+    "@typescript-eslint/eslint-plugin": "^2.24.0",
+    "@typescript-eslint/parser": "^2.24.0",
     "eslint": "^6.8.0",
     "eslint-config-prettier": "^6.10.0",
     "eslint-config-standard": "^14.1.0",
@@ -25,13 +25,14 @@
     "eslint-plugin-prettier": "^3.1.2",
     "eslint-plugin-promise": "^4.2.1",
     "eslint-plugin-standard": "^4.0.1",
-    "grunt": "^1.0.4",
+    "grunt": "^1.1.0",
     "grunt-license-report": "0.0.8",
     "prettier": "^1.19.1",
     "typescript": "^3.8.3"
   },
   "dependencies": {
-    "@types/node": "^13.9.0",
-    "discord.js": "^12.0.1"
+    "@types/node": "^13.9.1",
+    "axios": "^0.19.2",
+    "discord.js": "^12.0.2"
   }
 }

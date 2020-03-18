@@ -182,8 +182,9 @@ fabric.properties
 # grunt
 report/
 
-# token
+# keys
 .token
+.a3rtkey
 
 # Jetbrains
 .idea/

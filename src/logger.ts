@@ -8,23 +8,23 @@ export class Logger {
     this.date = new DateManager();
     this.path = "./log/" + this.date.getDateTimePath() + ".log";
     try {
-      fs.statSync("./log/")
+      fs.statSync("./log/");
     } catch (error) {
-      if(error.code === "ENOENT") {
+      if (error.code === "ENOENT") {
         fs.mkdirSync("./log/");
       } else {
         throw error;
       }
     }
   }
-  
-  public log(type :LogType, msg: string): void {
+
+  public log(type: LogType, msg: string): void {
     msg = this.date.getDateTime() + " [" + LogType[type] + "] " + msg;
     console.log(msg);
     this.write(msg);
   }
 
-  public error(type :LogType, msg: string): void {
+  public error(type: LogType, msg: string): void {
     msg = this.date.getDateTime() + " [" + LogType[type] + ":ERR] " + msg;
     console.log("\u001b[31m" + msg + "\u001b[0m");
     this.write(msg);
@@ -37,7 +37,8 @@ export class Logger {
 
 export enum LogType {
   Server,
-  Resend
+  Talk,
+  Dice
 }
 
 export class DateManager {
@@ -64,21 +65,31 @@ export class DateManager {
 
   public getDateTime(): string {
     this.now();
-    return this.year + "/" +
-      (this.month < 10 ? "0" + this.month : "" + this.month) + "/" +
-      (this.date < 10 ? "0" + this.date : "" + this.date) + " " +
-      (this.hour < 10 ? "0" + this.hour : "" + this.hour) + ":" +
-      (this.minute < 10 ? "0" + this.minute : "" + this.minute) + ":" +
-      (this.second < 10 ? "0" + this.second : "" + this.second);
+    return (
+      this.year +
+      "/" +
+      (this.month < 10 ? "0" + this.month : "" + this.month) +
+      "/" +
+      (this.date < 10 ? "0" + this.date : "" + this.date) +
+      " " +
+      (this.hour < 10 ? "0" + this.hour : "" + this.hour) +
+      ":" +
+      (this.minute < 10 ? "0" + this.minute : "" + this.minute) +
+      ":" +
+      (this.second < 10 ? "0" + this.second : "" + this.second)
+    );
   }
 
   public getDateTimePath(): string {
     this.now();
-    return this.year +
+    return (
+      this.year +
       (this.month < 10 ? "0" + this.month : "" + this.month) +
-      (this.date < 10 ? "0" + this.date : "" + this.date) + "_" +
+      (this.date < 10 ? "0" + this.date : "" + this.date) +
+      "_" +
       (this.hour < 10 ? "0" + this.hour : "" + this.hour) +
       (this.minute < 10 ? "0" + this.minute : "" + this.minute) +
-      (this.second < 10 ? "0" + this.second : "" + this.second);
+      (this.second < 10 ? "0" + this.second : "" + this.second)
+    );
   }
 }

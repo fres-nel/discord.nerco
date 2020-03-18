@@ -1,6 +1,5 @@
 import * as Discord from "discord.js";
-import * as fs from "fs";
-import * as Nerco from "./nerco"
+import * as Nerco from "./nerco";
 
 class Main {
   client: Discord.Client;
@@ -9,7 +8,7 @@ class Main {
 
   constructor() {
     this.client = new Discord.Client();
-    this.token = fs.readFileSync(".token", "utf-8");
+    this.token = process.env.NELCO_TOKEN;
     this.nerco = new Nerco.Nerco(this.client);
   }
 
