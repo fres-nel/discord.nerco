@@ -8,8 +8,8 @@
     "build": "tsc",
     "serve": "node build/app",
     "watch": "tsc --watch",
-    "lint": "eslint src/app.ts",
-    "lint:fix": "eslint --fix src/app.ts"
+    "lint": "eslint src --ext .ts",
+    "lint:fix": "eslint src --ext .ts --fix"
   },
   "keywords": [],
   "author": "",

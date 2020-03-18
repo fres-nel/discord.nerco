@@ -1,5 +1,5 @@
-import {Client, Message, PartialMessage} from "discord.js";
-import {Logger, LogType} from "./logger";
+import { Client, Message, PartialMessage } from "discord.js";
+import { Logger, LogType } from "./logger";
 import axios from "axios";
 
 export class Talk {
@@ -13,7 +13,7 @@ export class Talk {
     this.logger = logger;
     this.key = process.env.NELCO_A3RT;
     this.channels = new Array(0);
-    client.on("message", (message) => {
+    client.on("message", message => {
       if (message.author.bot) {
         return;
       } else if (message.content === "!nerco talk start") {
@@ -27,7 +27,7 @@ export class Talk {
   }
 
   private activate(message: Message | PartialMessage): void {
-    let id = message.channel.id;
+    const id = message.channel.id;
     if (this.channels.indexOf(id) === -1) {
       this.channels.push(id);
       message.reply("\nおしゃべりしよ！");
@@ -39,7 +39,7 @@ export class Talk {
   }
 
   private deactivate(message: Message | PartialMessage): void {
-    let id = message.channel.id;
+    const id = message.channel.id;
     if (this.channels.indexOf(id) !== -1) {
       this.channels.splice(this.channels.indexOf(id), 1);
       message.reply("\nばいばーい");
@@ -51,16 +51,17 @@ export class Talk {
   }
 
   private async talk(message: Message | PartialMessage) {
-    let id = message.channel.id;
+    const id = message.channel.id;
     let result = "...";
     if (this.channels.indexOf(id) === -1) return;
 
-    let sentence = message.content;
+    const sentence = message.content;
     const url = "https://api.a3rt.recruit-tech.co.jp/talk/v1/smalltalk";
     const params = new URLSearchParams();
     params.append("apikey", this.key);
     params.append("query", sentence);
-    await axios.post(url, params)
+    await axios
+      .post(url, params)
       .then(res => {
         if (res.data.status === 0) {
           result = res.data.results[0].reply;

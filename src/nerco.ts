@@ -1,7 +1,7 @@
-import {Client} from "discord.js";
-import {Logger, LogType} from "./logger";
-import {Talk} from "./talk";
-import {Dice} from "./dice";
+import { Client } from "discord.js";
+import { Logger, LogType } from "./logger";
+import { Talk } from "./talk";
+import { Dice } from "./dice";
 
 export class Nerco {
   client: Client;
@@ -20,7 +20,7 @@ export class Nerco {
   init(): void {
     this.logger.log(LogType.Server, "Server Initializing...");
     this.client.on("ready", () => {
-      this.logger.log(LogType.Server, "Ready.")
+      this.logger.log(LogType.Server, "Ready.");
     });
   }
 }
