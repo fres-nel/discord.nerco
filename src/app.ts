@@ -1,6 +1,6 @@
 import * as Discord from "discord.js";
 import * as fs from "fs";
-import * as Nerco from "./nerco"
+import * as Nerco from "./nerco";
 
 class Main {
   client: Discord.Client;
