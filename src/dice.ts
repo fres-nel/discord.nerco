@@ -11,46 +11,42 @@ export class Dice {
 
     this.client.on("message", message => {
       if (message.author.bot) return;
-      else if (message.content === "!d") this.d1(message);
-      else if (message.content === "!dd") this.d2(message);
-      else if (
-        message.content.match(/^!nerco dice [1-9]+[0-9]*d[1-9]+[0-9]*$/)
-      ) {
-        this.prodice(message);
+      else if (message.content === "!d") this.showRollSum(message, 1, 6);
+      else if (message.content === "!dd") this.showRollSum(message, 2, 6);
+      else if (message.content.match(/^!nerco dice [1-9][0-9]*d[1-9][0-9]*$/)) {
+        const line = message.content.split(" ")[2].split("d");
+        const before = parseInt(line[0]);
+        const after = parseInt(line[1]);
+        this.showRollSum(message, before, after);
       }
     });
   }
 
-  private async d1(message: Message | PartialMessage) {
-    const rand = Math.floor(Math.random() * 6 + 1);
-    await message.reply(" は 1d6を振って **" + rand + "** を出した。");
-    this.logger.log(LogType.Dice, message.author.username + " 1d6 : " + rand);
+  private showRollSum(
+    message: Message | PartialMessage,
+    numDice: number,
+    numFace: number
+  ): void {
+    if (numDice > 999) numDice = 999;
+    if (numFace > 999) numFace = 999;
+    const sum = this.rollDice(numDice, numFace);
+    message
+      .reply(
+        " は " + numDice + "d" + numFace + "を振って **" + sum + "** を出した。"
+      )
+      .then(() => {
+        this.logger.log(
+          LogType.Dice,
+          message.author.username + " " + numDice + "d" + numFace + " : " + sum
+        );
+      });
   }
 
-  private async d2(message: Message | PartialMessage) {
-    const rand = Math.floor(Math.random() * 6 + Math.random() * 6 + 2);
-    await message.reply(" は 2d6を振って **" + rand + "** を出した。");
-    this.logger.log(LogType.Dice, message.author.username + " 2d6 : " + rand);
-  }
-
-  private async prodice(message: Message | PartialMessage) {
-    const line = message.content.split(" ")[2].split("d");
-    let before = parseInt(line[0]);
-    let after = parseInt(line[1]);
-    if (before > 999) before = 999;
-    if (after > 999) after = 999;
-    let sum = 0.0;
-    let i: number;
-    for (i = 0; i < before; i++) {
-      sum += Math.random() * after + 1;
+  private rollDice(numDice: number, numFace: number): number {
+    let sum = 0;
+    for (let i = 0; i < numDice; i++) {
+      sum += Math.trunc(Math.random() * numFace) + 1;
     }
-    sum = Math.floor(sum);
-    await message.reply(
-      " は " + before + "d" + after + "を振って **" + sum + "** を出した。"
-    );
-    this.logger.log(
-      LogType.Dice,
-      message.author.username + " " + before + "d" + after + " : " + sum
-    );
+    return sum;
   }
 }
