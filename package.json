@@ -4,7 +4,7 @@
   "description": "Discord bot.",
   "main": "src/app.js",
   "scripts": {
-    "start": "npm run build && npm run serve",
+    "start": "",
     "build": "tsc",
     "serve": "node build/app",
     "watch": "tsc --watch",

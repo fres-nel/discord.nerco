@@ -1,7 +1,6 @@
 import {Client, Message, PartialMessage} from "discord.js";
 import {Logger, LogType} from "./logger";
-import * as fs from "fs";
-import axios from "axios"
+import axios from "axios";
 
 export class Talk {
   private client: Client;
@@ -12,7 +11,7 @@ export class Talk {
   constructor(client: Client, logger: Logger) {
     this.client = client;
     this.logger = logger;
-    this.key = fs.readFileSync(".a3rtkey", "utf-8");
+    this.key = process.env.NELCO_A3RT;
     this.channels = new Array(0);
     client.on("message", (message) => {
       if (message.author.bot) {
