@@ -18,7 +18,8 @@ Twitter: **@fres_nel**
 git clone https://github.com/fres-nel/discord.nerco.git
 cd discord.nerco
 npm install
-vim .token      <- Please write your token
+export NELCO_TOKEN=<Your discord bot token>
+export NELCO_A3RT=<Your a3rt token>
 npm run start
 ```
 
